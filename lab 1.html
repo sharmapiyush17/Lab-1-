@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        #message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dynamic Table Example</h2>
+    <table id="myTable">
+        <tr><td>Row1 Col1</td><td>Row1 Col2</td></tr>
+        <tr><td>Row2 Col1</td><td>Row2 Col2</td></tr>
+        <tr><td>Row3 Col1</td><td>Row3 Col2</td></tr>
+        <tr><td>Row4 Col1</td><td>Row4 Col2</td></tr>
+        <tr><td>Row5 Col1</td><td>Row5 Col2</td></tr>
+    </table><br>
+
+    <button onclick="insertRowEnd()">Insert row</button>
+    <button onclick="insertRowTop()">Insert row at top</button>
+    <button onclick="deleteLastRow()">Delete last row</button>
+    <button onclick="deleteFirstRow()">Delete first row</button>
+
+    <div id="message"></div>
+
+    <script>
+        function insertRowEnd() {
+            const table = document.getElementById("myTable");
+            const row = table.insertRow();
+            row.insertCell(0).innerHTML = "RowX Col1";
+            row.insertCell(1).innerHTML = "RowX Col2";
+            document.getElementById("message").innerText = "";
+        }
+
+        function insertRowTop() {
+            const table = document.getElementById("myTable");
+            const row = table.insertRow(0);
+            row.insertCell(0).innerHTML = "RowX Col1";
+            row.insertCell(1).innerHTML = "RowX Col2";
+            document.getElementById("message").innerText = "";
+        }
+
+        function deleteLastRow() {
+            const table = document.getElementById("myTable");
+            if (table.rows.length > 0) {
+                table.deleteRow(table.rows.length - 1);
+            }
+            toggleMessage();
+        }
+
+        function deleteFirstRow() {
+            const table = document.getElementById("myTable");
+            if (table.rows.length > 0) {
+                table.deleteRow(0);
+            }
+            toggleMessage();
+        }
+
+        function toggleMessage() {
+            const table = document.getElementById("myTable");
+            const message = document.getElementById("message");
+            if (table.rows.length === 0) {
+                message.innerText = "Message: No more rows to delete";
+            } else {
+                message.innerText = "";
+            }
+        }
+    </script>
+</body>
+</html>
